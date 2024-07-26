@@ -1,7 +1,6 @@
-// Navbar.js
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { colors } from "../theme";
+import logo from "../assets/Logo_light.png";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,17 +13,16 @@ function Navbar() {
     { name: "Contact Us", href: "#contact" },
   ];
 
+  const variants = {
+    open: { opacity: 1, x: 0 },
+    closed: { opacity: 0, x: "100%" },
+  };
+
   return (
-    <nav className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 px-6 shadow-lg">
+    <nav className="bg-gray-600 text-white py-4 px-6 shadow-lg">
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center">
-          <motion.a
-            href="#home"
-            className="text-2xl font-bold"
-            whileHover={{ scale: 1.05 }}
-          >
-            Your NGO
-          </motion.a>
+          <img src={logo} className="h-20" />
 
           {/* Mobile menu button */}
           <div className="md:hidden">
@@ -70,36 +68,37 @@ function Navbar() {
               </a>
             </motion.li>
           </ul>
-        </div>
 
-        {/* Mobile menu */}
-        {isOpen && (
-          <motion.ul
-            className="mt-4 md:hidden"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
+          {/* Mobile menu */}
+          <motion.div
+            initial={false}
+            animate={isOpen ? "open" : "closed"}
+            variants={variants}
+            transition={{ duration: 0.5 }}
+            className="fixed top-0 right-0 w-64 h-full bg-gray-700 shadow-xl z-50"
           >
-            {navItems.map((item, index) => (
-              <li key={index} className="mb-2">
+            <ul className="pt-5">
+              {navItems.map((item, index) => (
+                <li key={index} className="mb-2">
+                  <a
+                    href={item.href}
+                    className="block px-4 py-2 text-white hover:text-yellow-300 transition-colors"
+                  >
+                    {item.name}
+                  </a>
+                </li>
+              ))}
+              <li>
                 <a
-                  href={item.href}
-                  className="block hover:text-yellow-300 transition-colors"
+                  href="#donate"
+                  className="inline-block px-4 py-2 rounded-full bg-yellow-500 text-blue-900 font-semibold hover:bg-yellow-400 transition-colors"
                 >
-                  {item.name}
+                  Donate
                 </a>
               </li>
-            ))}
-            <li>
-              <a
-                href="#donate"
-                className="inline-block px-4 py-2 rounded-full bg-yellow-500 text-blue-900 font-semibold hover:bg-yellow-400 transition-colors"
-              >
-                Donate
-              </a>
-            </li>
-          </motion.ul>
-        )}
+            </ul>
+          </motion.div>
+        </div>
       </div>
     </nav>
   );

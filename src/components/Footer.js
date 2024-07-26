@@ -1,66 +1,79 @@
 import React from 'react';
-import { motion } from "framer-motion";
-import { colors } from "../theme";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFacebookF,
+  faInstagram,
+  faYoutube,
+  faTwitter,
+} from "@fortawesome/free-brands-svg-icons";
+import {
+  faMapMarkerAlt,
+  faPhone,
+  faEnvelope,
+} from "@fortawesome/free-solid-svg-icons";
+import Logo_light from "../assets/Logo_light.png";
 
 function Footer() {
   return (
-    <footer className="bg-gray-900 text-white py-12">
-      <div className="max-w-6xl mx-auto px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <motion.div
-            initial={{ x: -50, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            <img src="/path/to/logo.png" alt="NGO Logo" className="w-32 mb-4" />
-            <p className="text-gray-400">
-              Empowering communities, changing lives.
-            </p>
-          </motion.div>
-          <motion.div
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-          >
-            <h3 className="text-xl font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              {["About", "Events", "Gallery", "Contact", "Donate"].map(
-                (item, index) => (
-                  <li key={index}>
-                    <a
-                      href={`#${item.toLowerCase()}`}
-                      className="hover:text-gray-300 transition-colors"
-                    >
-                      {item}
-                    </a>
-                  </li>
-                )
-              )}
-            </ul>
-          </motion.div>
-          <motion.div
-            initial={{ x: 50, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
-          >
-            <h3 className="text-xl font-semibold mb-4">Connect With Us</h3>
-            <div className="flex space-x-4">
-              {["facebook", "twitter", "instagram", "youtube"].map(
-                (platform, index) => (
-                  <a
-                    key={index}
-                    href={`#${platform}`}
-                    className="text-2xl hover:text-gray-300 transition-colors"
-                  >
-                    <i className={`fab fa-${platform}`}></i>
-                  </a>
-                )
-              )}
-            </div>
-          </motion.div>
+    <footer className="bg-gray-600 text-gray-200 p-6">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="mb-4 md:mb-0">
+          <img
+            src={Logo_light}
+            alt="NGO Logo"
+            className="w-500 h-193 mx-auto"
+          />
+          <p className="mt-2 text-center">Empowering communities since 1998.</p>
         </div>
-        <div className="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
-          <p>&copy; 2024 Your NGO Name. All rights reserved.</p>
+        <div className="text-center md:order-2">
+          <h3 className="font-semibold text-lg mb-2">Quick Links</h3>
+          <ul className="inline-block text-left">
+            <li>
+              <a href="#about">About Us</a>
+            </li>
+            <li>
+              <a href="#events">Events</a>
+            </li>
+            <li>
+              <a href="#gallery">Gallery</a>
+            </li>
+            <li>
+              <a href="#contact">Contact Us</a>
+            </li>
+            <li>
+              <a href="#donate" className="text-yellow-400">
+                Donate
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div className="text-center md:order-3">
+          <h3 className="font-semibold text-lg mb-2">Contact & Connect</h3>
+          <ul className="inline-block text-left">
+            <li>
+              <FontAwesomeIcon icon={faMapMarkerAlt} /> 123 Charity St, City
+            </li>
+            <li>
+              <FontAwesomeIcon icon={faPhone} /> +1 (555) 123-4567
+            </li>
+            <li>
+              <FontAwesomeIcon icon={faEnvelope} /> contact@ngo.com
+            </li>
+          </ul>
+          <div className="flex justify-center mt-4">
+            <a href="#facebook" className="text-white mr-4">
+              <FontAwesomeIcon icon={faFacebookF} size="lg" />
+            </a>
+            <a href="#twitter" className="text-white mr-4">
+              <FontAwesomeIcon icon={faTwitter} size="lg" />
+            </a>
+            <a href="#instagram" className="text-white mr-4">
+              <FontAwesomeIcon icon={faInstagram} size="lg" />
+            </a>
+            <a href="#youtube" className="text-white mr-4">
+              <FontAwesomeIcon icon={faYoutube} size="lg" />
+            </a>
+          </div>
         </div>
       </div>
     </footer>
