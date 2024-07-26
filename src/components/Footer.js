@@ -4,7 +4,7 @@ import {
   faFacebookF,
   faInstagram,
   faYoutube,
-  faTwitter,
+  faXTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import {
   faMapMarkerAlt,
@@ -23,7 +23,7 @@ function Footer() {
             alt="NGO Logo"
             className="w-500 h-193 mx-auto"
           />
-          <p className="mt-2 text-center">Empowering communities since 1998.</p>
+          <p className="mt-2 text-center">Empowering communities since 2024.</p>
         </div>
         <div className="text-center md:order-2">
           <h3 className="font-semibold text-lg mb-2">Quick Links</h3>
@@ -65,7 +65,7 @@ function Footer() {
               <FontAwesomeIcon icon={faFacebookF} size="lg" />
             </a>
             <a href="#twitter" className="text-white mr-4">
-              <FontAwesomeIcon icon={faTwitter} size="lg" />
+              <FontAwesomeIcon icon={faXTwitter} size="lg" />
             </a>
             <a href="#instagram" className="text-white mr-4">
               <FontAwesomeIcon icon={faInstagram} size="lg" />

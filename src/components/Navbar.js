@@ -9,6 +9,7 @@ function Navbar() {
     { name: "Home", href: "#home" },
     { name: "About Us", href: "#about" },
     { name: "Events", href: "#events" },
+    { name: "Membership", href: "#membership" }, // Added Membership option here
     { name: "Gallery", href: "#gallery" },
     { name: "Contact Us", href: "#contact" },
   ];

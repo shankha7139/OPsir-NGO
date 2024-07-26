@@ -28,8 +28,11 @@ function About() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.5 }}
         >
-          [Your NGO's mission statement here. Make it impactful and concise,
-          highlighting your core values and objectives.]
+            "Our NGO, Graduate Club is dedicated to creating a world where every individual has access to basic necessities and the opportunity to lead a fulfilling life. We believe in the power of unity and strive to bring communities together to combat societal issues.",
+            "Our core values are compassion, integrity, and perseverance. We are committed to serving with empathy, conducting our work transparently, and never giving up in the face of adversity.",
+            "Our primary objective is to provide resources and support to those in need, whether it be through food drives, educational programs, or health services. We aim to not only meet immediate needs but also to implement sustainable solutions that address the root causes of these issues.",
+            "We are also dedicated to raising awareness about these societal issues, advocating for policy change, and inspiring others to take action. We believe that everyone has a role to play in making the world a better place.",
+            "Through our work, we hope to empower individuals, strengthen communities, and contribute to a more equitable and just society. Join us in our mission to make a difference."
         </motion.p>
         <motion.div
           className="mt-12 text-center"
