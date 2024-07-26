@@ -24,17 +24,17 @@ function Home() {
       <div className="w-full">
         <Slider {...settings}>
           <div className="w-full">
-            <img src="/src/assets/Banner_1.png" alt="Banner 1" className="object-cover w-full h-64" />
+            <img src="../assets/Banner_1.png" alt="Banner 1" className="object-cover w-full h-64" />
           </div>
           <div className="w-full">
-            <img src="/src/assets/Banner_2.png" alt="Banner 2" className="object-cover w-full h-64" />
+            <img src="../assets/Banner_2.png" alt="Banner 2" className="object-cover w-full h-64" />
           </div>
         </Slider>
       </div>
 
       {/* Rectangular Image Banner */}
       <div className="w-full h-32 bg-gray-300 mt-4">
-        <img src="path/to/your/rectangular-image.jpg" alt="Rectangular Banner" className="object-cover w-full h-full" />
+        <img src="../assets/Banner_2.png" alt="Rectangular Banner" className="object-cover w-full h-full" />
       </div>
     </div>
   );
