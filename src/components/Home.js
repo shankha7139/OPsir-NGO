@@ -3,6 +3,8 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import ban1 from "../assets/Banner_1.png";
+import ban2 from "../assets/Banner_2.png";
+
 
 function Home() {
   // Slider settings
@@ -28,23 +30,23 @@ function Home() {
             <img
               src={ban1}
               alt="Banner 1"
-              className="object-cover w-full h-64"
+              className="object-cover w-full h-200"
             />
           </div>
           <div className="w-full">
             <img
-              src="../assets/Banner_2.png"
+              src={ban2}
               alt="Banner 2"
-              className="object-cover w-full h-64"
+              className="object-cover w-full h-200"
             />
           </div>
         </Slider>
       </div>
 
       {/* Rectangular Image Banner */}
-      <div className="w-full h-32 bg-gray-300 mt-4">
+      <div className="w-full h-20 bg-gray-300 mt-4">
         <img
-          src="../assets/Banner_2.png"
+          src={ban2}
           alt="Rectangular Banner"
           className="object-cover w-full h-full"
         />
