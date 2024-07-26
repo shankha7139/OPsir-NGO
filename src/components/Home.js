@@ -60,34 +60,6 @@ function Home() {
           </div>
         ))}
       </Slider>
-
-      <motion.div
-        className="absolute bottom-0 left-0 right-0 bg-white py-4 px-8 shadow-lg"
-        initial={{ y: 50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.5, duration: 0.5 }}
-      >
-        <div className="flex justify-between items-center max-w-6xl mx-auto">
-          <div>
-            <h3
-              className="text-2xl font-bold"
-              style={{ color: colors.primary }}
-            >
-              Latest News
-            </h3>
-            <p className="text-gray-600">
-              Check out our recent achievements and upcoming events
-            </p>
-          </div>
-          <a
-            href="#news"
-            className="px-6 py-2 rounded-full text-white font-semibold"
-            style={{ backgroundColor: colors.secondary }}
-          >
-            Read More
-          </a>
-        </div>
-      </motion.div>
     </motion.div>
   );
 }

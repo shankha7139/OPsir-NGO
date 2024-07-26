@@ -6,11 +6,16 @@ import Events from './components/Events';
 import Gallery from './components/Gallery';
 import Testimonials from './components/Testimonials';
 import Footer from './components/Footer';
+import LatestNews from './components/LatestNews';
 
+const colors = {
+  primary: '#3498db', // replace with your primary color
+  secondary: '#e74c3c', // replace with your secondary color
+};
 
 function App() {
   return (
-    <div>
+    <div className="relative">
       <Navbar />
       <Home />
       <About />
@@ -18,9 +23,9 @@ function App() {
       <Gallery />
       <Testimonials />
       <Footer />
+      <LatestNews colors={colors} />
     </div>
   );
 }
-
 
 export default App;

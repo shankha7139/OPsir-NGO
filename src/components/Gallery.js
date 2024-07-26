@@ -40,14 +40,13 @@ function Gallery() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <img
+              <motion.img
                 src={image}
                 alt={`Gallery Image ${index + 1}`}
                 className="w-full h-64 object-cover"
+                whileHover={{ scale: 1.1 }}
+                transition={{ duration: 0.3 }}
               />
-              <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
-                <p className="text-white text-lg font-semibold">View Image</p>
-              </div>
             </motion.div>
           ))}
         </motion.div>
