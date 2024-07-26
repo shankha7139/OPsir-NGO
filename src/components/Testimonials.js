@@ -1,22 +1,78 @@
 import React from 'react';
+import { motion } from "framer-motion";
+import { colors } from "../theme";
 
 function TestimonialCard({ quote, author }) {
   return (
-    <div className="max-w-md rounded overflow-hidden shadow-lg bg-white p-6 m-2">
-      <p className="text-gray-600 text-base italic">"{quote}"</p>
-      <p className="text-gray-800 text-sm font-bold mt-4">- {author}</p>
-    </div>
+    <motion.div
+      className="max-w-md rounded-lg overflow-hidden shadow-xl bg-white p-8 m-4"
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      whileHover={{
+        scale: 1.05,
+        boxShadow:
+          "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+      }}
+    >
+      <div className="relative">
+        <svg
+          className="absolute top-0 left-0 w-16 h-16 text-gray-200 transform -translate-x-6 -translate-y-6"
+          fill="currentColor"
+          viewBox="0 0 32 32"
+          aria-hidden="true"
+        >
+          <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+        </svg>
+        <p className="relative z-10 text-gray-600 text-lg italic leading-relaxed">
+          {quote}
+        </p>
+      </div>
+      <p
+        className="text-gray-800 font-semibold mt-6 text-right"
+        style={{ color: colors.primary }}
+      >
+        - {author}
+      </p>
+    </motion.div>
   );
 }
 
 function Testimonials() {
   return (
-    <section id="testimonials" className="p-8 bg-white">
-      <h2 className="text-2xl font-bold text-center mb-4">Testimonials</h2>
-      <div className="flex flex-wrap justify-center">
-        {/* Sample testimonials */}
-        <TestimonialCard quote="This NGO has changed lives, and I'm proud to support it." author="Person One"/>
-        <TestimonialCard quote="A truly inspiring commitment to making a difference." author="Person Two"/>
+    <section
+      id="testimonials"
+      className="py-20 px-8 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50"
+    >
+      <div className="max-w-6xl mx-auto">
+        <motion.h2
+          className="text-4xl font-bold text-center mb-12"
+          style={{ color: colors.primary }}
+          initial={{ y: -30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          What People Say About Us
+        </motion.h2>
+        <motion.div
+          className="flex flex-wrap justify-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+        >
+          <TestimonialCard
+            quote="This NGO has truly changed lives. Their dedication and impact are inspiring, and I'm incredibly proud to support their mission."
+            author="Jane Doe, Volunteer"
+          />
+          <TestimonialCard
+            quote="I've seen firsthand the difference this organization makes. Their commitment to creating positive change is unparalleled and truly inspiring."
+            author="John Smith, Community Leader"
+          />
+          <TestimonialCard
+            quote="The work this NGO does is nothing short of transformative. They've created a ripple effect of positive change in our community."
+            author="Emily Chen, Beneficiary"
+          />
+        </motion.div>
       </div>
     </section>
   );
