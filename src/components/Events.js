@@ -122,9 +122,9 @@ function EventModal({ event, onClose }) {
 }
 
 function CurvedTimeline({ events }) {
-  const width = 1200;
-  const height = 800;
-  const curveControl = 150;
+  const width = 600; 
+  const height = 400;
+  const curveControl = 100; // 
 
   return (
     <svg
@@ -141,7 +141,7 @@ function CurvedTimeline({ events }) {
         strokeWidth="4"
       />
       <defs>
-        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%">
           <stop offset="0%" stopColor="#3b82f6" />
           <stop offset="100%" stopColor="#8b5cf6" />
         </linearGradient>
@@ -157,17 +157,13 @@ function Events() {
   useEffect(() => {
     const fetchEvents = async () => {
       const eventsCollection = collection(db, "events");
-      const eventsQuery = query(
-        eventsCollection,
-        orderBy("date", "desc"),
-        limit(5)
-      );
+      const eventsQuery = query(eventsCollection, orderBy("date", "desc"), limit(5));
       const querySnapshot = await getDocs(eventsQuery);
       const eventsList = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-      setEvents(eventsList.reverse());
+      setEvents(eventsList);
     };
 
     fetchEvents();

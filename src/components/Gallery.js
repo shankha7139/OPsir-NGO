@@ -49,26 +49,19 @@ function Gallery() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
         >
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-[250px]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {images.slice(0, displayCount).map((image, index) => (
               <motion.div
                 key={image.id}
-                className={`relative overflow-hidden rounded-2xl shadow-md ${
-                  index % 5 === 0
-                    ? "col-span-2 row-span-2"
-                    : index % 7 === 0
-                    ? "col-span-2"
-                    : index % 3 === 0
-                    ? "row-span-2"
-                    : ""
-                }`}
+                className="relative overflow-hidden rounded-2xl shadow-md"
+                style={{ paddingBottom: "100%" }} // This ensures a 1:1 aspect ratio
                 whileHover={{ scale: 1.03, zIndex: 1 }}
                 transition={{ duration: 0.3 }}
               >
                 <motion.img
                   src={image.url}
                   alt={image.description || `Gallery Image ${index + 1}`}
-                  className="w-full h-full object-cover"
+                  className="absolute top-0 left-0 w-full h-full object-cover"
                   whileHover={{ scale: 1.1 }}
                   transition={{ duration: 0.3 }}
                 />
