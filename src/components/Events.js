@@ -2,12 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import { collection, getDocs, query, orderBy, limit } from "firebase/firestore";
 import { db } from "../firebase/Firebase";
-
-const colors = {
-  primary: "#3b82f6",
-  accent: "#f59e0b",
-  background: "#f0f9ff",
-};
+import { colors } from "../theme";
 
 const CalendarIcon = ({ size = 14, color = colors.accent }) => (
   <svg
@@ -36,7 +31,7 @@ function EventCard({ event, onClick, index, position }) {
   const isLeft = position === "left";
   return (
     <motion.div
-      className={`bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transform transition duration-300 hover:scale-105 flex flex-col w-full md:w-[calc(50%-3rem)] ${
+      className={`bg-white bg-opacity-90 backdrop-filter backdrop-blur-lg rounded-lg shadow-xl overflow-hidden cursor-pointer transform transition duration-300 hover:scale-105 flex flex-col w-full md:w-[calc(50%-3rem)] ${
         isLeft ? "md:mr-auto" : "md:ml-auto"
       }`}
       onClick={onClick}
@@ -44,7 +39,7 @@ function EventCard({ event, onClick, index, position }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
-      <div className="h-40 bg-gradient-to-r from-gray-500 to-gray-500 relative">
+      <div className="h-40 bg-gradient-to-r from-gray-500 to-gray-400 relative">
         {event.images && event.images.length > 0 ? (
           <img
             src={event.images[0]}
@@ -60,16 +55,13 @@ function EventCard({ event, onClick, index, position }) {
           <h3 className="text-white text-lg font-semibold">{event.name}</h3>
         </div>
       </div>
-      <div className="p-4 flex-grow bg-gradient-to-b from-white to-gray-100">
+      <div className="p-4 flex-grow">
         <p className="text-sm text-gray-600 mb-2">
           {truncateText(event.description)}
         </p>
         <div className="flex items-center mt-auto">
           <CalendarIcon size={14} color={colors.accent} />
-          <p
-            className="text-xs font-medium ml-2"
-            style={{ color: colors.accent }}
-          >
+          <p className="text-xs font-medium ml-2 text-blue-600">
             {event.date}
           </p>
         </div>
@@ -89,25 +81,19 @@ function EventModal({ event, onClose }) {
       exit={{ opacity: 0 }}
     >
       <motion.div
-        className="bg-white rounded-lg max-w-lg w-full max-h-[90vh] overflow-y-auto"
+        className="bg-white bg-opacity-90 backdrop-filter backdrop-blur-lg rounded-lg max-w-lg w-full max-h-[90vh] overflow-y-auto"
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
       >
         <div className="p-6">
-          <h2
-            className="text-2xl font-bold mb-4"
-            style={{ color: colors.primary }}
-          >
+          <h2 className="text-2xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
             {event.name}
           </h2>
-          <p className="text-gray-600 mb-4">{event.description}</p>
+          <p className="text-gray-700 mb-4">{event.description}</p>
           <div className="flex items-center mb-4">
             <CalendarIcon size={18} color={colors.accent} />
-            <p
-              className="text-sm font-medium ml-2"
-              style={{ color: colors.accent }}
-            >
+            <p className="text-sm font-medium ml-2 text-blue-600">
               {event.date}
             </p>
           </div>
@@ -124,7 +110,7 @@ function EventModal({ event, onClose }) {
             </div>
           )}
           <button
-            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300"
+            className="mt-4 px-8 py-4 rounded-full text-white text-lg font-semibold transition-all duration-300 ease-in-out bg-gradient-to-r from-blue-500 to-purple-600 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
             onClick={onClose}
           >
             Close
@@ -137,7 +123,7 @@ function EventModal({ event, onClose }) {
 
 function CurvedTimeline({ events }) {
   const width = 1200;
-  const height = 800; // Fixed height for 5 events
+  const height = 800;
   const curveControl = 150;
 
   return (
@@ -148,16 +134,18 @@ function CurvedTimeline({ events }) {
     >
       <path
         d={`M ${width / 2} 0 
-           Q ${width / 2 + curveControl} ${height / 4} ${width / 2} ${
-          height / 2
-        }
-           Q ${width / 2 - curveControl} ${(3 * height) / 4} ${
-          width / 2
-        } ${height}`}
+           Q ${width / 2 + curveControl} ${height / 4} ${width / 2} ${height / 2}
+           Q ${width / 2 - curveControl} ${(3 * height) / 4} ${width / 2} ${height}`}
         fill="none"
-        stroke="#93c5fd"
+        stroke="url(#gradient)"
         strokeWidth="4"
       />
+      <defs>
+        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#3b82f6" />
+          <stop offset="100%" stopColor="#8b5cf6" />
+        </linearGradient>
+      </defs>
     </svg>
   );
 }
@@ -179,22 +167,30 @@ function Events() {
         id: doc.id,
         ...doc.data(),
       }));
-      setEvents(eventsList.reverse()); // Reverse to display in chronological order
+      setEvents(eventsList.reverse());
     };
 
     fetchEvents();
   }, []);
 
   return (
-    <section
+    <motion.section
       id="events"
-      className="py-12 px-4 relative overflow-hidden"
-      style={{ backgroundColor: colors.background }}
+      className="py-24 px-8 relative overflow-hidden"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
     >
+      {/* Gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 opacity-20"></div>
+
+      {/* Decorative circles */}
+      <div className="absolute top-0 right-0 w-64 h-64 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
+      <div className="absolute bottom-0 left-1/2 w-64 h-64 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
+
       <div className="max-w-6xl mx-auto relative">
         <motion.h2
-          className="text-3xl font-bold text-center mb-12 relative z-10"
-          style={{ color: colors.primary }}
+          className="text-5xl font-bold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600"
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}
@@ -226,7 +222,7 @@ function Events() {
           />
         )}
       </AnimatePresence>
-    </section>
+    </motion.section>
   );
 }
 
