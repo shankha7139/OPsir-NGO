@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { colors } from "../theme";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../firebase/Firebase"; // Ensure you have this firebase config file
+import { db } from "../firebase/Firebase";
 
 function Gallery() {
   const [images, setImages] = useState([]);
-  const [displayCount, setDisplayCount] = useState(12); // Initial number of images to display
-  const incrementCount = 8; // Number of additional images to load each time
+  const [displayCount, setDisplayCount] = useState(12);
+  const incrementCount = 8;
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -31,61 +30,71 @@ function Gallery() {
   return (
     <section
       id="gallery"
-      className="py-20 px-8 bg-gradient-to-bl from-green-50 via-blue-50 to-purple-50"
-      style={{ backgroundColor: colors.background }}
+      className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100"
     >
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-7xl mx-auto relative z-10">
         <motion.h2
-          className="text-4xl font-bold text-center mb-12"
-          style={{ color: colors.primary }}
-          initial={{ y: -30, opacity: 0 }}
+          className="text-5xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600"
+          initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.6 }}
         >
           Our Impact in Pictures
         </motion.h2>
+
+        {/* Elevated background for images */}
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[200px]"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
+          className="bg-white rounded-3xl shadow-2xl p-8 mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
         >
-          {images.slice(0, displayCount).map((image, index) => (
-            <motion.div
-              key={image.id}
-              className={`relative overflow-hidden rounded-lg shadow-lg ${
-                index % 5 === 0
-                  ? "col-span-2 row-span-2"
-                  : index % 7 === 0
-                  ? "col-span-2"
-                  : index % 3 === 0
-                  ? "row-span-2"
-                  : ""
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <motion.img
-                src={image.url}
-                alt={image.description || `Gallery Image ${index + 1}`}
-                className="w-full h-full object-cover"
-                whileHover={{ scale: 1.1 }}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-[250px]">
+            {images.slice(0, displayCount).map((image, index) => (
+              <motion.div
+                key={image.id}
+                className={`relative overflow-hidden rounded-2xl shadow-md ${
+                  index % 5 === 0
+                    ? "col-span-2 row-span-2"
+                    : index % 7 === 0
+                    ? "col-span-2"
+                    : index % 3 === 0
+                    ? "row-span-2"
+                    : ""
+                }`}
+                whileHover={{ scale: 1.03, zIndex: 1 }}
                 transition={{ duration: 0.3 }}
-              />
-            </motion.div>
-          ))}
+              >
+                <motion.img
+                  src={image.url}
+                  alt={image.description || `Gallery Image ${index + 1}`}
+                  className="w-full h-full object-cover"
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.3 }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 hover:opacity-70 transition-opacity duration-300"></div>
+                <p className="absolute bottom-4 left-4 text-white text-lg font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  {image.description || `Image ${index + 1}`}
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
+
         {displayCount < images.length && (
-          <div className="text-center mt-8">
-            <motion.button
-              className="px-6 py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition duration-300"
+          <motion.div
+            className="text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+          >
+            <button
+              className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1"
               onClick={loadMore}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
             >
               Load More
-            </motion.button>
-          </div>
+            </button>
+          </motion.div>
         )}
       </div>
     </section>

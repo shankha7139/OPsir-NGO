@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import image1 from '../assets/Gyan Pratiyogita 21:7:24/img1.jpeg';
-import image2 from '../assets/Gyan Pratiyogita 21:7:24/img2.jpeg';
-import image3 from '../assets/Gyan Pratiyogita 21:7:24/img3.jpeg';
-import image4 from '../assets/Gyan Pratiyogita 21:7:24/img4.jpeg';
-import image5 from '../assets/Gyan Pratiyogita 21:7:24/img5.jpeg';
+import { motion, AnimatePresence } from "framer-motion";
+import { collection, getDocs, query, orderBy, limit } from "firebase/firestore";
+import { db } from "../firebase/Firebase"; // Ensure this path is correct
 
 const colors = {
-  primary: '#3b82f6',
-  accent: '#f59e0b',
-  background: '#f0f9ff',
+  primary: "#3b82f6",
+  accent: "#f59e0b",
+  background: "#f0f9ff",
 };
 
 const CalendarIcon = ({ size = 14, color = colors.accent }) => (
@@ -31,117 +28,173 @@ const CalendarIcon = ({ size = 14, color = colors.accent }) => (
   </svg>
 );
 
-const images = [image1, image2, image3, image4, image5];
-
-function EventCard({ title, description, date, position, isLeft, images }) {
-  const [isHovered, setIsHovered] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isLargeScreen, setIsLargeScreen] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsLargeScreen(window.innerWidth >= 768);
-    };
-
-    handleResize(); // Check screen size on initial load
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  useEffect(() => {
-    let interval;
-    if (isHovered && isLargeScreen) {
-      interval = setInterval(() => {
-        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-      }, 2000);
-    }
-    return () => clearInterval(interval);
-  }, [isHovered, images.length, isLargeScreen]);
-
-  const cardVariants = {
-    hidden: { opacity: 0, x: isLeft ? -20 : 20 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.5 }
-    },
+function EventCard({ event, position, isLeft, onClick }) {
+  const truncateDescription = (text, maxLength = 60) => {
+    if (text.length <= maxLength) return text;
+    return text.substr(0, maxLength) + "...";
   };
 
   return (
     <motion.div
-      className={`absolute ${isLeft ? 'left-0 md:pr-8' : 'right-0 md:pl-8'} px-2 md:px-0`}
-      style={{ top: `${position}%`, width: '100%', maxWidth: '45%', transform: 'translateY(-50%)' }}
-      variants={cardVariants}
-      initial="hidden"
-      animate="visible"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className={`absolute ${
+        isLeft ? "left-0 md:pr-4" : "right-0 md:pl-4"
+      } px-2 md:px-0`}
+      style={{
+        top: `${position}px`,
+        width: "100%",
+        maxWidth: "48%",
+      }}
+      initial={{ opacity: 0, x: isLeft ? -20 : 20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.5 }}
     >
-      <div className={`bg-white rounded-lg shadow-sm overflow-hidden relative ${isLeft ? 'text-right' : 'text-left'}`}>
-        <div className="flex flex-col items-center p-2 md:p-3">
-          <h3 className="text-xs md:text-sm font-semibold mb-1" style={{ color: colors.primary }}>
-            {title}
+      <div
+        className="bg-white rounded-full shadow-md overflow-hidden cursor-pointer transform transition duration-300 hover:scale-105 flex"
+        onClick={onClick}
+      >
+        <div className="w-1/3 p-2 flex items-center justify-center">
+          {event.images && event.images.length > 0 ? (
+            <img
+              src={event.images[0]}
+              alt={event.name}
+              className="w-16 h-16 object-cover rounded-full"
+            />
+          ) : (
+            <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center">
+              <span className="text-gray-500 text-sm">No Image</span>
+            </div>
+          )}
+        </div>
+        <div className="w-2/3 p-2">
+          <h3
+            className="text-sm font-semibold mb-1"
+            style={{ color: colors.primary }}
+          >
+            {event.name}
           </h3>
-          <p className="text-xs text-gray-600 mb-1">{description}</p>
-          <div className="flex items-center justify-center">
+          <p className="text-xs text-gray-600 mb-1">
+            {truncateDescription(event.description)}
+          </p>
+          <div className="flex items-center">
             <CalendarIcon size={12} color={colors.accent} />
-            <p className="text-xs font-medium ml-1" style={{ color: colors.accent }}>
-              {date}
+            <p
+              className="text-xs font-medium ml-1"
+              style={{ color: colors.accent }}
+            >
+              {event.date}
             </p>
           </div>
         </div>
       </div>
       <div
-        className={`absolute top-1/2 ${isLeft ? 'right-0' : 'left-0'} w-8 h-0.5 bg-gray-300 hidden md:block`}
+        className={`absolute top-1/2 ${
+          isLeft ? "right-0" : "left-0"
+        } w-4 h-0.5 bg-gray-300 hidden md:block`}
       ></div>
       <div
-        className={`absolute top-1/2 ${isLeft ? 'right-0' : 'left-0'} w-2 md:w-3 h-2 md:h-3 bg-blue-500 rounded-full transform translate-y-[-50%] ${isLeft ? 'translate-x-[50%]' : 'translate-x-[-50%]'}`}
+        className={`absolute top-1/2 ${
+          isLeft ? "right-0" : "left-0"
+        } w-2 h-2 bg-blue-500 rounded-full transform translate-y-[-50%] ${
+          isLeft ? "translate-x-[50%]" : "translate-x-[-50%]"
+        }`}
       ></div>
-      {isHovered && isLargeScreen && (
-        <motion.div
-          className="absolute z-10 p-1 md:p-2 bg-white rounded-lg shadow-lg"
-          style={{ top: '-250%', left: '50%', transform: 'translateX(-50%)', width: '80%', maxWidth: '270px', height: '150px md:height-200px' }}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.3 }}
-        >
-          <img src={images[currentImageIndex]} alt={title} className="w-full h-full object-cover rounded-md" />
-          <div
-            className="absolute bottom-[-8px] left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-white"
-          ></div>
-        </motion.div>
-      )}
+    </motion.div>
+  );
+}
+
+function EventModal({ event, onClose }) {
+  if (!event) return null;
+
+  return (
+    <motion.div
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <motion.div
+        className="bg-white rounded-lg max-w-lg w-full max-h-[90vh] overflow-y-auto"
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+      >
+        <div className="p-6">
+          <h2
+            className="text-2xl font-bold mb-4"
+            style={{ color: colors.primary }}
+          >
+            {event.name}
+          </h2>
+          <p className="text-gray-600 mb-4">{event.description}</p>
+          <div className="flex items-center mb-4">
+            <CalendarIcon size={18} color={colors.accent} />
+            <p
+              className="text-sm font-medium ml-2"
+              style={{ color: colors.accent }}
+            >
+              {event.date}
+            </p>
+          </div>
+          {event.images && event.images.length > 0 && (
+            <div className="grid grid-cols-2 gap-4 mb-4">
+              {event.images.map((image, index) => (
+                <img
+                  key={index}
+                  src={image}
+                  alt={`Event ${index + 1}`}
+                  className="w-full h-40 object-cover rounded"
+                />
+              ))}
+            </div>
+          )}
+          <button
+            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300"
+            onClick={onClose}
+          >
+            Close
+          </button>
+        </div>
+      </motion.div>
     </motion.div>
   );
 }
 
 function Events() {
-  const events = [
-    { title: "Community Cleanup", description: "Join us for a day of environmental action!", date: "Aug 15, 2024", images: [image1, image2, image3, image4, image5] },
-    { title: "Fundraising Gala", description: "An evening of music and inspiration", date: "Sep 22, 2024", images: [image1, image2, image3, image4, image5] },
-    { title: "Youth Workshop", description: "Empowering the next generation", date: "Oct 5, 2024", images: [image1, image2, image3, image4, image5] },
-    { title: "Tech Conference", description: "Exploring the future of technology", date: "Nov 18, 2024", images: [image1, image2, image3, image4, image5] },
-    { title: "Holiday Charity Drive", description: "Spreading joy to those in need", date: "Dec 10, 2024", images: [image1, image2, image3, image4, image5] }
-  ];
+  const [events, setEvents] = useState([]);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
-  const startDate = new Date('2024-08-01');
-  const endDate = new Date('2024-12-31');
+  useEffect(() => {
+    const fetchEvents = async () => {
+      const eventsCollection = collection(db, "events");
+      const eventsQuery = query(
+        eventsCollection,
+        orderBy("date", "asc"),
+        limit(7)
+      );
+      const querySnapshot = await getDocs(eventsQuery);
+      const eventsList = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setEvents(eventsList);
+    };
 
-  const getPosition = (date) => {
-    const eventDate = new Date(date);
-    const totalDays = (endDate - startDate) / (1000 * 60 * 60 * 24);
-    const daysFromStart = (eventDate - startDate) / (1000 * 60 * 60 * 24);
-    return (daysFromStart / totalDays) * 100;
+    fetchEvents();
+  }, []);
+
+  const getPosition = (index) => {
+    return index * 120; // Reduced spacing between cards
   };
 
   return (
-    <section id="events" className="py-12 px-4" style={{ backgroundColor: colors.background }}>
-      <div className="max-w-4xl mx-auto">
+    <section
+      id="events"
+      className="py-12 px-4"
+      style={{ backgroundColor: colors.background }}
+    >
+      <div className="max-w-3xl mx-auto">
         <motion.h2
-          className="text-2xl md:text-3xl font-bold text-center mb-10"
+          className="text-3xl font-bold text-center mb-8"
           style={{ color: colors.primary }}
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -149,18 +202,31 @@ function Events() {
         >
           Upcoming Events
         </motion.h2>
-        <div className="relative" style={{ height: '600px' }}>
+        <div className="relative">
           <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gray-300 transform -translate-x-1/2"></div>
           {events.map((event, index) => (
             <EventCard
-              key={index}
-              {...event}
-              position={getPosition(event.date)}
+              key={event.id}
+              event={event}
+              position={getPosition(index)}
               isLeft={index % 2 === 0}
+              onClick={() => setSelectedEvent(event)}
             />
           ))}
+          {/* Add extra padding at the bottom */}
+          <div
+            style={{ paddingBottom: `${getPosition(events.length)}px` }}
+          ></div>
         </div>
       </div>
+      <AnimatePresence>
+        {selectedEvent && (
+          <EventModal
+            event={selectedEvent}
+            onClose={() => setSelectedEvent(null)}
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 }

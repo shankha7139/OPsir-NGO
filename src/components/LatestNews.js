@@ -8,7 +8,8 @@ const LatestNews = ({ colors }) => {
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          className="fixed bottom-0 z-10 left-0 right-0 bg-white py-4 px-8 shadow-lg"
+          className="fixed bottom-0 left-0 right-0 bg-white py-4 px-8 shadow-lg"
+          style={{ zIndex: 9999 }}
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 50, opacity: 0 }}
@@ -20,10 +21,10 @@ const LatestNews = ({ colors }) => {
                 className="text-2xl font-bold"
                 style={{ color: colors.primary }}
               >
-                Latest News
+                Latest Event Alert!
               </h3>
               <p className="text-gray-600">
-                Check out our recent achievements and upcoming events
+                Fill the form for the upcoming event
               </p>
             </div>
             <div className="flex items-center">
@@ -32,7 +33,7 @@ const LatestNews = ({ colors }) => {
                 className="px-6 py-2 rounded-full text-white font-semibold"
                 style={{ backgroundColor: colors.secondary }}
               >
-                Read More
+                Fill Now
               </a>
               <button
                 onClick={() => setIsVisible(false)}
@@ -49,3 +50,5 @@ const LatestNews = ({ colors }) => {
 };
 
 export default LatestNews;
+
+
