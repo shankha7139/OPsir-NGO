@@ -39,7 +39,7 @@ const LatestNews = () => {
             <div className="flex items-center">
               <motion.a
                 href="#news"
-                className="px-6 py-2 rounded-full text-white font-semibold bg-gradient-to-r from-blue-500 to-purple-600 hover:shadow-lg transition-all duration-300 ease-in-out transform hover:-translate-y-1"
+                className="px-6 py-2 rounded-full text-white font-semibold bg-gradient-to-r from-blue-500 to-purple-600 hover:shadow-lg transition-all duration-300 ease-in-out transform hover:-translate-y-1 text-center"
                 whileHover={{ scale: 1.05 }}
               >
                 Fill Now

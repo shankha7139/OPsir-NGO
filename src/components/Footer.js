@@ -11,7 +11,7 @@ import {
   faPhone,
   faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
-import Logo_light from "../assets/Logo_dark.png";
+import Logo_light from "../assets/Logo_wide.png";
 
 function Footer() {
   const gradientText = {

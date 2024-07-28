@@ -96,7 +96,7 @@ function Navbar() {
                 ) : (
                   <path
                     fillRule="evenodd"
-                    d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"
+                    d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"
                   />
                 )}
               </svg>
@@ -138,6 +138,20 @@ function Navbar() {
             transition={{ duration: 0.5 }}
             className="fixed top-0 right-0 w-64 h-full bg-white bg-opacity-90 backdrop-filter backdrop-blur-lg shadow-xl z-50"
           >
+            <div className="flex justify-end p-4">
+              <button
+                onClick={() => setIsOpen(false)}
+                className="focus:outline-none text-gray-800"
+              >
+                <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24">
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M18.278 16.864a1 1 0 0 1-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 0 1-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 0 1 1.414-1.414l4.829 4.828 4.828-4.828a1 1 0 1 1 1.414 1.414l-4.828 4.829 4.828 4.828z"
+                  />
+                </svg>
+              </button>
+            </div>
             <ul className="pt-5">
               {navItems.map((item, index) => (
                 <motion.li 
