@@ -42,7 +42,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="py-4 px-6 shadow-lg relative overflow-hidden">
+    <nav className="py-4 px-6 shadow-lg relative overflow-hidden z-50">
       <style>
         {`
           @keyframes blob {
@@ -96,7 +96,7 @@ function Navbar() {
                 ) : (
                   <path
                     fillRule="evenodd"
-                    d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"
+                    d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2z"
                   />
                 )}
               </svg>
@@ -137,6 +137,7 @@ function Navbar() {
             variants={variants}
             transition={{ duration: 0.5 }}
             className="fixed top-0 right-0 w-64 h-full bg-white bg-opacity-90 backdrop-filter backdrop-blur-lg shadow-xl z-50"
+            style={{ zIndex: 9999 }} // Ensure it is on top of other content
           >
             <div className="flex justify-end p-4">
               <button
