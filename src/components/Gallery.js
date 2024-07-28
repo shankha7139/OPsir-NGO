@@ -1,15 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { colors } from "../theme";
-import img1 from "../assets/Gyan Pratiyogita 21:7:24/img1.jpeg";
-import img2 from "../assets/Gyan Pratiyogita 21:7:24/img2.jpeg";
-import img3 from "../assets/Gyan Pratiyogita 21:7:24/img3.jpeg";
-import img4 from "../assets/Gyan Pratiyogita 21:7:24/img4.jpeg";
-import img5 from "../assets/Gyan Pratiyogita 21:7:24/img5.jpeg";
-import img6 from "../assets/Gyan Pratiyogita 21:7:24/img6.jpeg";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebase/Firebase"; // Ensure you have this firebase config file
 
 function Gallery() {
-  const images = [img1, img2, img3, img4, img5, img6];
+  const [images, setImages] = useState([]);
+  const [displayCount, setDisplayCount] = useState(12); // Initial number of images to display
+  const incrementCount = 8; // Number of additional images to load each time
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      const querySnapshot = await getDocs(collection(db, "gallery"));
+      const imageList = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setImages(imageList);
+    };
+
+    fetchImages();
+  }, []);
+
+  const loadMore = () => {
+    setDisplayCount((prevCount) =>
+      Math.min(prevCount + incrementCount, images.length)
+    );
+  };
 
   return (
     <section
@@ -28,28 +45,48 @@ function Gallery() {
           Our Impact in Pictures
         </motion.h2>
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-3 gap-4"
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[200px]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
         >
-          {images.map((image, index) => (
+          {images.slice(0, displayCount).map((image, index) => (
             <motion.div
-              key={index}
-              className="relative overflow-hidden rounded-lg shadow-lg"
+              key={image.id}
+              className={`relative overflow-hidden rounded-lg shadow-lg ${
+                index % 5 === 0
+                  ? "col-span-2 row-span-2"
+                  : index % 7 === 0
+                  ? "col-span-2"
+                  : index % 3 === 0
+                  ? "row-span-2"
+                  : ""
+              }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               <motion.img
-                src={image}
-                alt={`Gallery Image ${index + 1}`}
-                className="w-full h-64 object-cover"
+                src={image.url}
+                alt={image.description || `Gallery Image ${index + 1}`}
+                className="w-full h-full object-cover"
                 whileHover={{ scale: 1.1 }}
                 transition={{ duration: 0.3 }}
               />
             </motion.div>
           ))}
         </motion.div>
+        {displayCount < images.length && (
+          <div className="text-center mt-8">
+            <motion.button
+              className="px-6 py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition duration-300"
+              onClick={loadMore}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Load More
+            </motion.button>
+          </div>
+        )}
       </div>
     </section>
   );

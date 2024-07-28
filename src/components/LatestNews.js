@@ -8,7 +8,7 @@ const LatestNews = ({ colors }) => {
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          className="fixed bottom-0 left-0 right-0 bg-white py-4 px-8 shadow-lg"
+          className="fixed bottom-0 z-10 left-0 right-0 bg-white py-4 px-8 shadow-lg"
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 50, opacity: 0 }}
