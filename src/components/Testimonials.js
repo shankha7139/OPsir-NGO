@@ -1,23 +1,21 @@
 import React from 'react';
 import { motion } from "framer-motion";
-import { colors } from "../theme";
 
 function TestimonialCard({ quote, author }) {
   return (
     <motion.div
-      className="max-w-md rounded-lg overflow-hidden shadow-xl bg-white p-8 m-4"
+      className="max-w-md rounded-xl overflow-hidden shadow-xl bg-white p-8 m-4 border border-purple-100"
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       whileHover={{
         scale: 1.05,
-        boxShadow:
-          "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+        boxShadow: "0 20px 25px -5px rgba(59, 130, 246, 0.1), 0 10px 10px -5px rgba(139, 92, 246, 0.1)",
       }}
     >
       <div className="relative">
         <svg
-          className="absolute top-0 left-0 w-16 h-16 text-gray-200 transform -translate-x-6 -translate-y-6"
+          className="absolute top-0 left-0 w-16 h-16 text-blue-100 transform -translate-x-6 -translate-y-6"
           fill="currentColor"
           viewBox="0 0 32 32"
           aria-hidden="true"
@@ -29,8 +27,7 @@ function TestimonialCard({ quote, author }) {
         </p>
       </div>
       <p
-        className="text-gray-800 font-semibold mt-6 text-right"
-        style={{ color: colors.primary }}
+        className="text-right mt-6 font-semibold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent"
       >
         - {author}
       </p>
@@ -42,12 +39,11 @@ function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="py-20 px-8 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50"
+      className="py-20 px-8 bg-gradient-to-br from-blue-200 via-purple-100 to-pink-200"
     >
       <div className="max-w-6xl mx-auto">
         <motion.h2
-          className="text-4xl font-bold text-center mb-12"
-          style={{ color: colors.primary }}
+          className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent"
           initial={{ y: -30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}

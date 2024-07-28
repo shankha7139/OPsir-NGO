@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import { collection, getDocs, query, orderBy, limit } from "firebase/firestore";
-import { db } from "../firebase/Firebase"; // Ensure this path is correct
+import { db } from "../firebase/Firebase";
 
 const colors = {
   primary: "#3b82f6",
@@ -28,76 +28,52 @@ const CalendarIcon = ({ size = 14, color = colors.accent }) => (
   </svg>
 );
 
-function EventCard({ event, position, isLeft, onClick }) {
-  const truncateDescription = (text, maxLength = 60) => {
-    if (text.length <= maxLength) return text;
-    return text.substr(0, maxLength) + "...";
-  };
+function truncateText(text, maxLength = 25) {
+  return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
+}
 
+function EventCard({ event, onClick, index, position }) {
+  const isLeft = position === "left";
   return (
     <motion.div
-      className={`absolute ${
-        isLeft ? "left-0 md:pr-4" : "right-0 md:pl-4"
-      } px-2 md:px-0`}
-      style={{
-        top: `${position}px`,
-        width: "100%",
-        maxWidth: "48%",
-      }}
-      initial={{ opacity: 0, x: isLeft ? -20 : 20 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.5 }}
+      className={`bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transform transition duration-300 hover:scale-105 flex flex-col w-full md:w-[calc(50%-3rem)] ${
+        isLeft ? "md:mr-auto" : "md:ml-auto"
+      }`}
+      onClick={onClick}
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
     >
-      <div
-        className="bg-white rounded-full shadow-md overflow-hidden cursor-pointer transform transition duration-300 hover:scale-105 flex"
-        onClick={onClick}
-      >
-        <div className="w-1/3 p-2 flex items-center justify-center">
-          {event.images && event.images.length > 0 ? (
-            <img
-              src={event.images[0]}
-              alt={event.name}
-              className="w-16 h-16 object-cover rounded-full"
-            />
-          ) : (
-            <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center">
-              <span className="text-gray-500 text-sm">No Image</span>
-            </div>
-          )}
-        </div>
-        <div className="w-2/3 p-2">
-          <h3
-            className="text-sm font-semibold mb-1"
-            style={{ color: colors.primary }}
-          >
-            {event.name}
-          </h3>
-          <p className="text-xs text-gray-600 mb-1">
-            {truncateDescription(event.description)}
-          </p>
-          <div className="flex items-center">
-            <CalendarIcon size={12} color={colors.accent} />
-            <p
-              className="text-xs font-medium ml-1"
-              style={{ color: colors.accent }}
-            >
-              {event.date}
-            </p>
+      <div className="h-40 bg-gradient-to-r from-gray-500 to-gray-500 relative">
+        {event.images && event.images.length > 0 ? (
+          <img
+            src={event.images[0]}
+            alt={event.name}
+            className="w-full h-full object-cover mix-blend-overlay"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center">
+            <span className="text-white text-lg">No Image</span>
           </div>
+        )}
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-2">
+          <h3 className="text-white text-lg font-semibold">{event.name}</h3>
         </div>
       </div>
-      <div
-        className={`absolute top-1/2 ${
-          isLeft ? "right-0" : "left-0"
-        } w-4 h-0.5 bg-gray-300 hidden md:block`}
-      ></div>
-      <div
-        className={`absolute top-1/2 ${
-          isLeft ? "right-0" : "left-0"
-        } w-2 h-2 bg-blue-500 rounded-full transform translate-y-[-50%] ${
-          isLeft ? "translate-x-[50%]" : "translate-x-[-50%]"
-        }`}
-      ></div>
+      <div className="p-4 flex-grow bg-gradient-to-b from-white to-gray-100">
+        <p className="text-sm text-gray-600 mb-2">
+          {truncateText(event.description)}
+        </p>
+        <div className="flex items-center mt-auto">
+          <CalendarIcon size={14} color={colors.accent} />
+          <p
+            className="text-xs font-medium ml-2"
+            style={{ color: colors.accent }}
+          >
+            {event.date}
+          </p>
+        </div>
+      </div>
     </motion.div>
   );
 }
@@ -159,6 +135,33 @@ function EventModal({ event, onClose }) {
   );
 }
 
+function CurvedTimeline({ events }) {
+  const width = 1200;
+  const height = 800; // Fixed height for 5 events
+  const curveControl = 150;
+
+  return (
+    <svg
+      className="hidden md:block absolute left-0 top-24 w-full h-[calc(100%-6rem)]"
+      viewBox={`0 0 ${width} ${height}`}
+      preserveAspectRatio="none"
+    >
+      <path
+        d={`M ${width / 2} 0 
+           Q ${width / 2 + curveControl} ${height / 4} ${width / 2} ${
+          height / 2
+        }
+           Q ${width / 2 - curveControl} ${(3 * height) / 4} ${
+          width / 2
+        } ${height}`}
+        fill="none"
+        stroke="#93c5fd"
+        strokeWidth="4"
+      />
+    </svg>
+  );
+}
+
 function Events() {
   const [events, setEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -168,55 +171,51 @@ function Events() {
       const eventsCollection = collection(db, "events");
       const eventsQuery = query(
         eventsCollection,
-        orderBy("date", "asc"),
-        limit(7)
+        orderBy("date", "desc"),
+        limit(5)
       );
       const querySnapshot = await getDocs(eventsQuery);
       const eventsList = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-      setEvents(eventsList);
+      setEvents(eventsList.reverse()); // Reverse to display in chronological order
     };
 
     fetchEvents();
   }, []);
 
-  const getPosition = (index) => {
-    return index * 120; // Reduced spacing between cards
-  };
-
   return (
     <section
       id="events"
-      className="py-12 px-4"
+      className="py-12 px-4 relative overflow-hidden"
       style={{ backgroundColor: colors.background }}
     >
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-6xl mx-auto relative">
         <motion.h2
-          className="text-3xl font-bold text-center mb-8"
+          className="text-3xl font-bold text-center mb-12 relative z-10"
           style={{ color: colors.primary }}
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          Upcoming Events
+          Latest Events
         </motion.h2>
-        <div className="relative">
-          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gray-300 transform -translate-x-1/2"></div>
+        <CurvedTimeline events={events} />
+        <div className="relative z-10">
           {events.map((event, index) => (
-            <EventCard
+            <div
               key={event.id}
-              event={event}
-              position={getPosition(index)}
-              isLeft={index % 2 === 0}
-              onClick={() => setSelectedEvent(event)}
-            />
+              className="mb-16 flex flex-col md:flex-row items-center"
+            >
+              <EventCard
+                event={event}
+                onClick={() => setSelectedEvent(event)}
+                index={index}
+                position={index % 2 === 0 ? "left" : "right"}
+              />
+            </div>
           ))}
-          {/* Add extra padding at the bottom */}
-          <div
-            style={{ paddingBottom: `${getPosition(events.length)}px` }}
-          ></div>
         </div>
       </div>
       <AnimatePresence>

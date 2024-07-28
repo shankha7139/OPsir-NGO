@@ -31,11 +31,11 @@ function Home() {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 500,
+    speed: 3000,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 5000,
+    autoplaySpeed: 2500, // Changed from 5000 to 2500 (2.5 seconds)
     cssEase: "ease-in-out",
     arrows: true,
     nextArrow: <SampleNextArrow />,
