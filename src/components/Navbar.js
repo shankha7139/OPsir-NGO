@@ -6,9 +6,9 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    { name: "Home", href: "#home" },
+    { name: "Home", href: "/" },
     { name: "About Us", href: "#about" },
-    { name: "Events", href: "#events" },
+    { name: "Events", href: "/events" },
     { name: "Membership", href: "#membership" },
     { name: "Gallery", href: "#gallery" },
     { name: "Contact Us", href: "#contact" },

@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import Home from "./pages/HomePage";
 import FormPage from "./pages/FormPage";
+import EventsPage from "./pages/EventsPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/test" element={<FormPage />} />
+        <Route path="/events" element={<EventsPage />} />
       </Routes>
     </BrowserRouter>
   );
