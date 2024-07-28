@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       animation: {
         blob: "blob 7s infinite",
+        shake: "shake 1.4s ease-in-out infinite",
       },
       keyframes: {
         blob: {
@@ -18,13 +19,16 @@ module.exports = {
             transform: "translate(-20px, 20px) scale(0.9)",
           },
           "100%": {
-            transform: "tranlate(0px, 0px) scale(1)",
+            transform: "translate(0px, 0px) scale(1)",
           },
+        },
+        shake: {
+          "0%, 100%": { transform: "translateX(0)" },
+          "10%, 30%, 50%, 70%, 90%": { transform: "translateX(-5px)" },
+          "20%, 40%, 60%, 80%": { transform: "translateX(5px)" },
         },
       },
     },
   },
   plugins: [],
 };
-
-
