@@ -1,8 +1,10 @@
 import React from 'react';
 import { motion } from "framer-motion";
 import { colors } from "../theme";
+import { useNavigate } from "react-router-dom";
 
 function About() {
+  const navigate = useNavigate();
   return (
     <motion.section
       id="about"
@@ -72,6 +74,7 @@ function About() {
         >
           <a
             href="#learn-more"
+            onClick={() => navigate("/about")}
             className="inline-block px-8 py-4 rounded-full text-white text-lg font-semibold transition-all duration-300 ease-in-out bg-gradient-to-r from-blue-500 to-purple-600 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
           >
             Learn More
