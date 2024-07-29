@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from "react-router-dom";
+import ModalComponent from './ModalComponent';
 
 const LatestNews = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleClose = () => {
     setIsVisible(false);
@@ -18,6 +20,15 @@ const LatestNews = () => {
     setTimeout(() => {
       setIsVisible(true);
     }, 100); // Small delay to allow the collapse button to disappear
+  };
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+    handleClose();
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   // Inline styles for animations and text effects
@@ -62,8 +73,7 @@ const LatestNews = () => {
               </div>
               <div className="flex items-center">
                 <motion.a
-                  href="#news"
-                  onClick={() => navigate("/test")}
+                  onClick={handleOpenModal}
                   className="px-6 py-2 rounded-full text-white font-semibold bg-gradient-to-r from-blue-500 to-purple-600 hover:shadow-lg transition-all duration-300 ease-in-out transform hover:-translate-y-1 text-center"
                   whileHover={{ scale: 1.05 }}
                 >
@@ -94,6 +104,7 @@ const LatestNews = () => {
           Latest News
         </motion.div>
       )}
+      <ModalComponent isOpen={isModalOpen} onClose={handleCloseModal} />
     </>
   );
 };
