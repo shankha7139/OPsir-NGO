@@ -13,7 +13,7 @@ function Navbar() {
     { name: "Membership", href: "/membership" },
     { name: "Gallery", href: "/gallery" },
     { name: "Thought", href: "/founders" },
-    { name: "Admit", href: "/admit" },
+    // { name: "Admit", href: "/admit" },
   ];
 
   const variants = {

@@ -9,7 +9,7 @@ import html2canvas from "html2canvas";
 const neomorphicStyle = {
   backgroundColor: "#f0f0f3",
   borderRadius: "20px",
-  boxShadow: "10px 10px 20px #d1d1d1, -10px -10px 20px #ffffff",
+//   boxShadow: "10px 10px 20px #d1d1d1, -10px -10px 20px #ffffff",
 };
 
 const inputStyle = {
@@ -110,9 +110,9 @@ const AdmitCardGenerator = () => {
     >
       <form onSubmit={fetchUser} className="mb-8" style={neomorphicStyle}>
         <div className="p-8">
-          <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
+          <h1 className="text-3xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
             Admit Card Generator
-          </h2>
+          </h1>
           <div className="mb-4">
             <label
               htmlFor="email"
