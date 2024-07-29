@@ -223,8 +223,8 @@ const AdmitCardGenerator = () => {
                 </div>
                 <div className="mt-6 text-center">
                   <p className="text-sm text-gray-600">
-                    This admit card is valid for the upcoming examination.
-                    Please bring a printed copy along with a valid ID.
+                    This admit card is valid for the upcoming Events. Please
+                    bring a printed copy along with a valid ID.
                   </p>
                 </div>
               </div>
