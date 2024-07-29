@@ -142,7 +142,7 @@ const MembershipForm = () => {
       transition={{ duration: 0.5 }}
     >
       <h1 className="text-3xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-        Membership Form
+        सदस्यता फ़ॉर्म
       </h1>
       {error && (
         <div
@@ -156,7 +156,7 @@ const MembershipForm = () => {
       <motion.form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-gray-700">Name</label>
+            <label className="block text-gray-700">नाम</label>
             <input
               type="text"
               name="name"
@@ -168,7 +168,7 @@ const MembershipForm = () => {
             />
           </div>
           <div>
-            <label className="block text-gray-700">Gender</label>
+            <label className="block text-gray-700">लिंग</label>
             <select
               name="gender"
               value={formData.gender}
@@ -177,14 +177,14 @@ const MembershipForm = () => {
               style={neomorphicInputStyle}
               required
             >
-              <option value="">Select Gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
+              <option value="">लिंग चुनें</option>
+              <option value="male">पुरुष</option>
+              <option value="female">महिला</option>
+              <option value="other">अन्य</option>
             </select>
           </div>
           <div>
-            <label className="block text-gray-700">Phone Number</label>
+            <label className="block text-gray-700">फोन नंबर</label>
             <input
               type="tel"
               name="phoneNumber"
@@ -196,7 +196,7 @@ const MembershipForm = () => {
             />
           </div>
           <div>
-            <label className="block text-gray-700">Email</label>
+            <label className="block text-gray-700">ईमेल</label>
             <input
               type="email"
               name="email"
@@ -208,7 +208,7 @@ const MembershipForm = () => {
             />
           </div>
           <div>
-            <label className="block text-gray-700">Age</label>
+            <label className="block text-gray-700">आयु</label>
             <input
               type="number"
               name="age"
@@ -221,7 +221,7 @@ const MembershipForm = () => {
           </div>
           <div>
             <label className="block text-gray-700">
-              Highest Educational Qualification
+              सर्वोच्च शैक्षिक योग्यता
             </label>
             <input
               type="text"
@@ -234,7 +234,7 @@ const MembershipForm = () => {
             />
           </div>
           <div>
-            <label className="block text-gray-700">Aadhar Number</label>
+            <label className="block text-gray-700">आधार संख्या</label>
             <input
               type="text"
               name="aadharNumber"
@@ -246,7 +246,7 @@ const MembershipForm = () => {
             />
           </div>
           <div>
-            <label className="block text-gray-700">Photo</label>
+            <label className="block text-gray-700">फोटो</label>
             <input
               type="file"
               name="photo"
@@ -273,13 +273,13 @@ const MembershipForm = () => {
                     }));
                   }}
                 >
-                  Remove
+                  हटाएं
                 </button>
               </div>
             )}
           </div>
           <div className="md:col-span-2">
-            <label className="block text-gray-700">Address</label>
+            <label className="block text-gray-700">पता</label>
             <textarea
               name="address"
               value={formData.address}
@@ -324,7 +324,7 @@ const MembershipForm = () => {
               ></path>
             </svg>
           ) : (
-            "Submit"
+            "भेजें"
           )}
         </motion.button>
       </motion.form>

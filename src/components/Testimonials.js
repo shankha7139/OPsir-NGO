@@ -48,7 +48,7 @@ function Testimonials() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          What People Say About Us
+          हमारे बारे में लोगों के विचार
         </motion.h2>
         <motion.div
           className="flex flex-wrap justify-center"
@@ -57,16 +57,16 @@ function Testimonials() {
           transition={{ delay: 0.2, duration: 0.5 }}
         >
           <TestimonialCard
-            quote="This NGO has truly changed lives. Their dedication and impact are inspiring, and I'm incredibly proud to support their mission."
-            author="Jane Doe, Volunteer"
+            quote="इस एनजीओ ने वास्तव में जीवन बदल दिए हैं। उनकी प्रतिबद्धता और प्रभाव प्रेरणादायक हैं, और मैं उनके मिशन का समर्थन करते हुए बेहद गर्व महसूस करता हूँ।"
+            author="सुमीत चौधरी, स्वयंसेवक"
           />
           <TestimonialCard
-            quote="I've seen firsthand the difference this organization makes. Their commitment to creating positive change is unparalleled and truly inspiring."
-            author="John Smith, Community Leader"
+            quote="मैंने खुद इस संगठन द्वारा किए गए बदलाव को देखा है। सकारात्मक परिवर्तन लाने के प्रति उनकी प्रतिबद्धता बेजोड़ और वास्तव में प्रेरणादायक है।"
+            author="ऋषि चौहान, सामुदायिक नेता"
           />
           <TestimonialCard
-            quote="The work this NGO does is nothing short of transformative. They've created a ripple effect of positive change in our community."
-            author="Emily Chen, Beneficiary"
+            quote="यह एनजीओ जो काम करता है वह परिवर्तनकारी से कम नहीं है। उन्होंने हमारे समुदाय में सकारात्मक परिवर्तन की लहर पैदा की है।"
+            author="अनिल तेवतिया, लाभार्थी"
           />
         </motion.div>
       </div>

@@ -49,7 +49,7 @@ function Gallery() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6 }}
         >
-          Our Impact in Pictures
+          हमारे प्रभाव की तस्वीरें
         </motion.h2>
 
         {/* Elevated background for images */}
@@ -101,7 +101,7 @@ function Gallery() {
               className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1"
               onClick={loadMore}
             >
-              Load More
+              और दिखाएँ
             </button>
           </motion.div>
         )}

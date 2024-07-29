@@ -35,12 +35,12 @@ function Footer() {
             className="w-500 h-193 mx-auto"
           />
           <p className="mt-2 text-center font-medium">
-            Empowering communities since 2024.
+            2024 से समुदायों को सशक्त बना रहे हैं।
           </p>
         </div>
         <div className="text-center md:order-2">
           <h3 className="font-bold text-xl mb-2" style={gradientText}>
-            Quick Links
+            महत्वपूर्ण लिंक
           </h3>
           <ul className="inline-block text-left">
             <li className="mb-2">
@@ -49,7 +49,7 @@ function Footer() {
                 onClick={() => navigate("/about")}
                 className="hover:text-blue-600 transition-colors duration-200"
               >
-                About Us
+                हमारी जानकारी
               </a>
             </li>
             <li className="mb-2">
@@ -58,7 +58,7 @@ function Footer() {
                 onClick={() => navigate("/events")}
                 className="hover:text-blue-600 transition-colors duration-200"
               >
-                Events
+                कार्यक्रम
               </a>
             </li>
             <li className="mb-2">
@@ -67,16 +67,16 @@ function Footer() {
                 onClick={() => navigate("/gallery")}
                 className="hover:text-blue-600 transition-colors duration-200"
               >
-                Gallery
+                गैलरी
               </a>
             </li>
             <li className="mb-2">
               <a
-                href="#contact"
-                onClick={() => navigate("/comingsoon")}
+                href="#membership"
+                onClick={() => navigate("/membership")}
                 className="hover:text-blue-600 transition-colors duration-200"
               >
-                Contact Us
+                सदस्यता
               </a>
             </li>
             <li>
@@ -85,14 +85,14 @@ function Footer() {
                 onClick={() => navigate("/comingsoon")}
                 className="text-blue-600 font-semibold hover:text-purple-600 transition-colors duration-200"
               >
-                Donate
+                दान करें
               </a>
             </li>
           </ul>
         </div>
         <div className="text-center md:order-3">
           <h3 className="font-bold text-xl mb-2" style={gradientText}>
-            Contact & Connect
+            संपर्क और जुड़ें।
           </h3>
           <ul className="inline-block text-left">
             <li className="mb-2">
@@ -100,18 +100,18 @@ function Footer() {
                 icon={faMapMarkerAlt}
                 className="text-blue-600 mr-2"
               />{" "}
-              123 Charity St, City
+              १२३, मेरठ, उत्तर प्रदेश
             </li>
             <li className="mb-2">
               <FontAwesomeIcon icon={faPhone} className="text-blue-600 mr-2" />{" "}
-              +1 (555) 123-4567
+              +९१ ९८००८७९५२१
             </li>
             <li className="mb-2">
               <FontAwesomeIcon
                 icon={faEnvelope}
                 className="text-blue-600 mr-2"
               />{" "}
-              contact@ngo.com
+              opsingh@srmist.edu.in
             </li>
           </ul>
           <div className="flex justify-center mt-4">

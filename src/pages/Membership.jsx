@@ -29,7 +29,7 @@ const Membership = () => {
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500">
       <Navbar />
       <div className="marquee-container py-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white text-center">
-          <marquee scrollamount="25"> Our Esteemed Members -- 
+          <marquee scrollamount="25"> हमारे सम्मानित सदस्य --
             {" " + memberNames.join(' • ')}
           </marquee>
       </div>
@@ -43,11 +43,11 @@ const Membership = () => {
           {/* Header and Membership Status Switch */}
           <div className="mb-8">
             <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-pink-600">
-              Membership Portal
+              सदस्यता पोर्टल
             </h1>
 
             <h3 className="text-l sm:text-xl font-bold text-center mb-2 text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-pink-600">
-              Are you an esteemed member?
+              क्या आप एक सदस्य हैं?
             </h3>
             <div className="flex justify-center">
               <div className="bg-gray-100 p-1 rounded-full w-full max-w-xs sm:max-w-md">
@@ -60,7 +60,7 @@ const Membership = () => {
                         : "text-gray-700 hover:bg-gray-200"
                     }`}
                   >
-                    New Member
+                    नया सदस्य
                   </button>
                   <button
                     onClick={() => setIsMember(true)}
@@ -70,7 +70,7 @@ const Membership = () => {
                         : "text-gray-700 hover:bg-gray-200"
                     }`}
                   >
-                    Existing Member
+                    आईडी कार्ड बनाएं
                   </button>
                 </div>
               </div>
@@ -114,23 +114,23 @@ const Membership = () => {
               >
                 <div className="bg-gradient-to-r from-indigo-100 to-pink-100 p-8 rounded-2xl shadow-inner">
                   <h2 className="text-2xl font-semibold mb-4 text-gray-800">
-                    Welcome to Our Community
+                    हमारे समुदाय में आपका स्वागत है
                   </h2>
                   <p className="text-gray-600 mb-6">
-                    Join us to unlock exclusive benefits and resources. Select your membership status above to get started.
+                    हमारे साथ जुड़ें और विशेष लाभ और संसाधनों का लाभ उठाएं। आरंभ करने के लिए ऊपर अपनी सदस्यता स्थिति चुनें।
                   </p>
                   <ul className="text-center max-w-md mx-auto mb-6">
                     <li className="flex justify-center items-center mb-2">
                         <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
-                        Access to premium content
+                        प्रीमियम सामग्री तक पहुंच
                     </li>
                     <li className="flex justify-center items-center mb-2">
                         <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
-                        Exclusive member events
+                        विशेष सदस्य कार्यक्रम
                     </li>
                     <li className="flex justify-center items-center">
                         <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
-                        Networking opportunities
+                        नेटवर्किंग के अवसर
                     </li>
                 </ul>
                 </div>

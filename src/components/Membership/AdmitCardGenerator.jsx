@@ -111,14 +111,14 @@ const AdmitCardGenerator = () => {
       <form onSubmit={fetchUser} className="mb-8" style={neomorphicStyle}>
         <div className="p-8">
           <h1 className="text-3xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-            Admit Card Generator
+            आईडी कार्ड जनरेटर
           </h1>
           <div className="mb-4">
             <label
               htmlFor="email"
               className="block text-sm font-medium text-gray-700 mb-2"
             >
-              Enter your email address
+              अपना ईमेल दर्ज करें
             </label>
             <input
               type="email"
@@ -137,7 +137,7 @@ const AdmitCardGenerator = () => {
             className="w-full transition duration-200 ease-in-out transform hover:scale-105"
             disabled={loading}
           >
-            {loading ? "Searching..." : "Generate Admit Card"}
+            {loading ? "हम खोज रहे हैं..." : "आईडी कार्ड बनाएं"}
           </button>
         </div>
       </form>

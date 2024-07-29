@@ -55,7 +55,7 @@ const GalleryPage = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
           >
-            Gallery
+            गैलरी
           </motion.h1>
           
           <motion.div

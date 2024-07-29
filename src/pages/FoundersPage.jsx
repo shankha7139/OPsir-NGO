@@ -44,14 +44,14 @@ export default function FoundersPage() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
           >
-            Our Founders
+            हमारे संस्थापक
           </motion.h1>
 
           <div className="flex flex-col sm:flex-row justify-center items-stretch gap-8">
             <FounderCard
               image={founder1}
-              name="Founder One"
-              title="CEO"
+              name="डॉ. ओम पाल सिंह"
+              title="संस्थापक"
               thoughts="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ipsum nam qui dolor officiis optio incidunt neque deserunt!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ipsum nam qui dolor officiis optio incidunt neque deserunt!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ipsum nam qui dolor officiis optio incidunt neque deserunt!Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ipsum nam qui dolor officiis optio incidunt neque deserunt!"
             />
             <FounderCard

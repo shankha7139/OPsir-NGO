@@ -48,7 +48,7 @@ const ModalComponent = ({ isOpen, onClose }) => {
         >
           <X size={24} />
         </button>
-        <h2 className="text-2xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600">Live Events</h2>
+        <h2 className="text-2xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600">आगामी कार्यक्रम</h2>
         <div className="space-y-4">
           {events.map((event, index) => (
             <motion.div 
@@ -65,7 +65,7 @@ const ModalComponent = ({ isOpen, onClose }) => {
                 onClick={() => handleRegisterClick(event.eventName, event.url)}
                 className="mt-2 flex items-center space-x-2 text-blue-500 hover:text-blue-600 transition-colors duration-300"
               >
-                <span>Register</span>
+                <span>पंजीकरण करें</span>
                 <ArrowRight size={16} />
               </button>
             </motion.div>

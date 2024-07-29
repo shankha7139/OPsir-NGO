@@ -70,7 +70,7 @@ const EventsPage = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
           >
-            Events so far ...
+            अब तक के कार्यक्रम...
           </motion.h1>
           
           <motion.div

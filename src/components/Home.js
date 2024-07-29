@@ -90,10 +90,10 @@ function Home() {
               <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                 <div className="text-center">
                   <h1 className="text-5xl font-bold text-white mb-4">
-                    Making a Difference
+                    हम क्रांति लाएंगे
                   </h1>
                   <p className="text-xl text-white mb-8">
-                    Join us in our mission to create positive change
+                    हमारे साथ जुड़ें सकारात्मक परिवर्तन लाने के हमारे मिशन में
                   </p>
                   <motion.a
                     href="#donate"
@@ -104,7 +104,7 @@ function Home() {
                       scale: 1.05,
                     }}
                   >
-                    Donate Now
+                    दान करें
                   </motion.a>
                 </div>
               </div>

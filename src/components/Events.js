@@ -200,7 +200,7 @@ function Events() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          Latest Events
+          हमारे कार्यक्रम
         </motion.h2>
         <CurvedTimeline events={events} />
         <div className="relative z-10">

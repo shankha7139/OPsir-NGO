@@ -56,7 +56,7 @@ const ComingSoon = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            Coming Soon
+            जल्द आ रहा है
           </motion.h1>
           <motion.p
             className="text-xl text-white mb-12"
@@ -64,7 +64,7 @@ const ComingSoon = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.8 }}
           >
-            We're working hard to bring you something amazing. Stay tuned!
+            हम आपके लिए कुछ अद्भुत लाने के लिए कड़ी मेहनत कर रहे हैं। बने रहें!
           </motion.p>
           <div className="flex justify-center space-x-4 mb-12">
             {Object.entries(timeLeft).map(([unit, value]) => (
@@ -91,7 +91,7 @@ const ComingSoon = () => {
           >
             <input
               type="email"
-              placeholder="Enter your email"
+              placeholder="अपना ईमेल दर्ज करें"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 w-full md:w-auto"
@@ -101,7 +101,7 @@ const ComingSoon = () => {
               type="submit"
               className="bg-purple-700 text-white px-6 py-2 rounded-lg hover:bg-purple-800 transition duration-300 w-full md:w-auto"
             >
-              Notify Me
+              मुझे सूचित करें
             </button>
           </motion.form>
         </div>

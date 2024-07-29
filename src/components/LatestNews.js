@@ -65,10 +65,10 @@ const LatestNews = () => {
             <div className="flex justify-between items-center max-w-6xl mx-auto relative z-10">
               <div>
                 <h3 className="text-2xl font-bold" style={styles.gradientText}>
-                  Latest Event Alert!
+                  नवीनतम कार्यक्रम अलर्ट!
                 </h3>
                 <p className="text-gray-600">
-                  Fill the form for the upcoming event
+                  आगामी कार्यक्रम के लिए फॉर्म भरें।
                 </p>
               </div>
               <div className="flex items-center">
@@ -77,7 +77,7 @@ const LatestNews = () => {
                   className="px-6 py-2 rounded-full text-white font-semibold bg-gradient-to-r from-blue-500 to-purple-600 hover:shadow-lg transition-all duration-300 ease-in-out transform hover:-translate-y-1 text-center"
                   whileHover={{ scale: 1.05 }}
                 >
-                  Fill Now
+                  अभी भरें
                 </motion.a>
                 <motion.button
                   onClick={handleClose}
@@ -101,7 +101,7 @@ const LatestNews = () => {
           transition={{ duration: 0.5 }}
           onClick={handleExpand}
         >
-          Latest News
+          नवीनतम अपडेट
         </motion.div>
       )}
       <ModalComponent isOpen={isModalOpen} onClose={handleCloseModal} />

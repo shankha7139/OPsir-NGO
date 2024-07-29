@@ -51,7 +51,7 @@ export default function AboutPage() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
           >
-            About Us
+            हमारे बारे में
           </motion.h1>
           
           <motion.div
@@ -81,13 +81,13 @@ export default function AboutPage() {
                 isActive={activeTab === "vision"}
                 onClick={() => setActiveTab("vision")}
               >
-                Vision
+                हमारा नज़रिया
               </TabButton>
               <TabButton
                 isActive={activeTab === "mission"}
                 onClick={() => setActiveTab("mission")}
               >
-                Mission
+                हमारा विशेष कार्य
               </TabButton>
             </div>
             <motion.div
@@ -100,7 +100,7 @@ export default function AboutPage() {
             >
               {activeTab === "vision" && (
                 <div className="text-center">
-                  <h2 className="text-2xl font-bold mb-4 text-blue-600">Our Vision</h2>
+                  <h2 className="text-2xl font-bold mb-4 text-blue-600">हमारा नज़रिया</h2>
                   <p className="text-gray-700">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ipsum nam qui dolor officiis optio incidunt neque deserunt! Facilis necessitatibus quo minus ad. Reiciendis ullam doloremque veniam possimus doloribus id voluptatum nobis voluptatem optio. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ipsum nam qui dolor officiis optio incidunt neque deserunt! Facilis necessitatibus quo minus ad. Reiciendis ullam doloremque veniam possimus doloribus id voluptatum nobis voluptatem optio.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ipsum nam qui dolor officiis optio incidunt neque deserunt! Facilis necessitatibus quo minus ad. Reiciendis ullam doloremque veniam possimus doloribus id voluptatum nobis voluptatem optio. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ipsum nam qui dolor officiis optio incidunt neque deserunt! Facilis necessitatibus quo minus ad. Reiciendis ullam doloremque veniam possimus doloribus id voluptatum nobis voluptatem optio.
                   </p>
@@ -108,7 +108,7 @@ export default function AboutPage() {
               )}
               {activeTab === "mission" && (
                 <div className="text-center">
-                  <h2 className="text-2xl font-bold mb-4 text-purple-600">Our Mission</h2>
+                  <h2 className="text-2xl font-bold mb-4 text-purple-600">हमारा विशेष कार्य</h2>
                   <p className="text-gray-700">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ipsum nam qui dolor officiis optio incidunt neque deserunt! Facilis necessitatibus quo minus ad. Reiciendis ullam doloremque veniam possimus doloribus id voluptatum nobis voluptatem optio. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ipsum nam qui dolor officiis optio incidunt neque deserunt! Facilis necessitatibus quo minus ad. Reiciendis ullam doloremque veniam possimus doloribus id voluptatum nobis voluptatem optio.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ipsum nam qui dolor officiis optio incidunt neque deserunt! Facilis necessitatibus quo minus ad. Reiciendis ullam doloremque veniam possimus doloribus id voluptatum nobis voluptatem optio. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ipsum nam qui dolor officiis optio incidunt neque deserunt! Facilis necessitatibus quo minus ad. Reiciendis ullam doloremque veniam possimus doloribus id voluptatum nobis voluptatem optio.
                   </p>
