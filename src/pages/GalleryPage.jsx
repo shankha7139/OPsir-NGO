@@ -50,7 +50,7 @@ const GalleryPage = () => {
       >
         <div className="max-w-6xl mx-auto relative z-10">
           <motion.h1
-            className="text-4xl sm:text-5xl font-bold text-center mb-8 text-gray-800"
+            className="text-4xl sm:text-5xl font-bold mb-8 text-center text-transparent bg-clip-text bg-gradient-to-l from-purple-800 via-blue-400 to-pink-800"
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
