@@ -1,16 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { collection, getDocs } from 'firebase/firestore';
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import MembershipForm from "../components/Membership/MembershipForm";
 import AdmitCardGenerator from "../components/Membership/AdmitCardGenerator";
+import { db } from "../firebase/Firebase"; 
 
 const Membership = () => {
   const [isMember, setIsMember] = useState(null);
+  const [memberNames, setMemberNames] = useState([]);
+
+  const fetchMemberNames = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'members'));
+      const membersData = querySnapshot.docs.map(doc => doc.data().name);
+      setMemberNames(membersData);
+    } catch (error) {
+      console.error("Error fetching member names: ", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchMemberNames();
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500">
       <Navbar />
+      <div className="marquee-container py-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white text-center">
+          <marquee scrollamount="25"> Our Esteemed Members -- 
+            {" " + memberNames.join(' • ')}
+          </marquee>
+      </div>
       <main className="flex-grow flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8">
         <motion.div
           className="w-full max-w-4xl p-6 sm:p-8 lg:p-10 bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl"
