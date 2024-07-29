@@ -13,38 +13,40 @@ const Membership = () => {
       <Navbar />
       <main className="flex-grow flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8">
         <motion.div
-          className="w-full max-w-4xl p-8 sm:p-10 bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl"
+          className="w-full max-w-4xl p-6 sm:p-8 lg:p-10 bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
           {/* Header and Membership Status Switch */}
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-pink-600">
+            <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-pink-600">
               Membership Portal
             </h1>
             <div className="flex justify-center">
-              <div className="bg-gray-100 p-1 rounded-full">
-                <button
-                  onClick={() => setIsMember(false)}
-                  className={`px-6 py-2 rounded-full font-semibold text-sm transition-all duration-200 ${
-                    isMember === false
-                      ? "bg-indigo-600 text-white shadow-lg"
-                      : "text-gray-700 hover:bg-gray-200"
-                  }`}
-                >
-                  New Member
-                </button>
-                <button
-                  onClick={() => setIsMember(true)}
-                  className={`px-6 py-2 rounded-full font-semibold text-sm transition-all duration-200 ${
-                    isMember === true
-                      ? "bg-pink-600 text-white shadow-lg"
-                      : "text-gray-700 hover:bg-gray-200"
-                  }`}
-                >
-                  Existing Member
-                </button>
+              <div className="bg-gray-100 p-1 rounded-full w-full max-w-xs sm:max-w-md">
+                <div className="flex flex-col sm:flex-row justify-center">
+                  <button
+                    onClick={() => setIsMember(false)}
+                    className={`px-4 sm:px-6 py-2 rounded-full font-semibold text-xs sm:text-sm transition-all duration-200 mb-2 sm:mb-0 ${
+                      isMember === false
+                        ? "bg-indigo-600 text-white shadow-lg"
+                        : "text-gray-700 hover:bg-gray-200"
+                    }`}
+                  >
+                    New Member
+                  </button>
+                  <button
+                    onClick={() => setIsMember(true)}
+                    className={`px-4 sm:px-6 py-2 rounded-full font-semibold text-xs sm:text-sm transition-all duration-200 ${
+                      isMember === true
+                        ? "bg-pink-600 text-white shadow-lg"
+                        : "text-gray-700 hover:bg-gray-200"
+                    }`}
+                  >
+                    Existing Member
+                  </button>
+                </div>
               </div>
             </div>
           </div>
