@@ -13,6 +13,7 @@ import FoundersPage from "./pages/FoundersPage";
 import Membership from "./pages/Membership";
 import GalleryPage from "./pages/GalleryPage";
 import AdmitPage from "./pages/AdmitPage";
+import ComingSoon from "./pages/CommingSoon";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/founders" element={<FoundersPage />} />
         <Route path="/membership" element={<Membership />} />
         <Route path="/admit" element={<AdmitPage />} />
+        <Route path="/comingsoon" element={<ComingSoon />} />
       </Routes>
     </BrowserRouter>
   );

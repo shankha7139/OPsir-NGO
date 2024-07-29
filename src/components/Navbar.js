@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import logo from "../assets/Logo_wide.png";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,6 +43,8 @@ function Navbar() {
     },
   };
 
+  const navigate = useNavigate();
+
   return (
     <nav className="py-4 px-6 shadow-lg relative overflow-hidden z-50">
       <style>
@@ -59,21 +62,21 @@ function Navbar() {
       <div className="absolute inset-0 bg-gradient-to-br from-blue-200 via-purple-100 to-pink-200 opacity-70"></div>
 
       {/* Decorative circles */}
-      <div 
+      <div
         className="absolute top-0 right-0 w-32 h-32 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-20"
-        style={{...styles.blobAnimation, ...styles.blobAnimationDelay2000}}
+        style={{ ...styles.blobAnimation, ...styles.blobAnimationDelay2000 }}
       ></div>
-      <div 
+      <div
         className="absolute bottom-0 left-1/2 w-32 h-32 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-20"
-        style={{...styles.blobAnimation, ...styles.blobAnimationDelay4000}}
+        style={{ ...styles.blobAnimation, ...styles.blobAnimationDelay4000 }}
       ></div>
 
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="flex justify-between items-center">
-          <motion.img 
-            src={logo} 
-            className="h-20 w-auto" 
-            style={{ minWidth: '200px' }} // Stretch the logo wider
+          <motion.img
+            src={logo}
+            className="h-20 w-auto"
+            style={{ minWidth: "200px" }} // Stretch the logo wider
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -113,8 +116,8 @@ function Navbar() {
                   style={styles.navLink}
                   whileHover={{
                     ...styles.navLinkHover,
-                    textShadow: 'none',
-                    transform: 'scale(1.05) translateY(-2px)', // Bounce effect
+                    textShadow: "none",
+                    transform: "scale(1.05) translateY(-2px)", // Bounce effect
                   }}
                 >
                   {item.name}
@@ -124,6 +127,7 @@ function Navbar() {
             <motion.li whileHover={{ scale: 1.1 }}>
               <a
                 href="#donate"
+                onClick={() => navigate("/comingsoon")}
                 className="px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold hover:shadow-lg transition-all duration-300 ease-in-out transform hover:-translate-y-1"
               >
                 Donate
@@ -156,18 +160,14 @@ function Navbar() {
             </div>
             <ul className="pt-5">
               {navItems.map((item, index) => (
-                <motion.li 
-                  key={index} 
-                  className="mb-2"
-                  whileHover="hover"
-                >
+                <motion.li key={index} className="mb-2" whileHover="hover">
                   <motion.a
                     href={item.href}
                     style={styles.navLink}
                     whileHover={{
                       ...styles.navLinkHover,
-                      textShadow: 'none',
-                      transform: 'scale(1.05) translateY(-2px)', // Bounce effect
+                      textShadow: "none",
+                      transform: "scale(1.05) translateY(-2px)", // Bounce effect
                     }}
                     className="block px-4 py-2"
                   >
