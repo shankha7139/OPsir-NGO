@@ -7,6 +7,7 @@ import { colors } from "../theme";
 import ban2 from "../assets/Banner_2.png";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase/Firebase"; // Ensure you have this firebase config file
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [banners, setBanners] = useState([]);
@@ -68,6 +69,7 @@ function Home() {
   };
 
   const allBanners = [...banners, { id: "hardcoded", url: ban2 }];
+  const navigate = useNavigate();
 
   return (
     <motion.div
@@ -95,6 +97,7 @@ function Home() {
                   </p>
                   <motion.a
                     href="#donate"
+                    onClick={() => navigate("/comingsoon")}
                     className="inline-block px-8 py-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white text-lg font-semibold transition-all duration-300 ease-in-out"
                     style={{ backgroundColor: colors.accent }}
                     whileHover={{
