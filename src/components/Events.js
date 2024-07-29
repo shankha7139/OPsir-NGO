@@ -32,7 +32,7 @@ function EventCard({ event, onClick, index, position }) {
   const isLeft = position === "left";
   return (
     <motion.div
-      className={`bg-white bg-opacity-90 backdrop-filter backdrop-blur-lg rounded-lg shadow-xl overflow-hidden cursor-pointer transform transition duration-300 hover:scale-105 flex flex-col w-full md:w-[calc(50%-3rem)] ${
+      className={`bg-white/80 backdrop-filter backdrop-blur-lg rounded-lg shadow-xl overflow-hidden cursor-pointer transform transition duration-300 hover:scale-105 flex flex-col w-full md:w-[calc(50%-3rem)] ${
         isLeft ? "md:mr-auto" : "md:ml-auto"
       }`}
       onClick={onClick}
@@ -62,9 +62,7 @@ function EventCard({ event, onClick, index, position }) {
         </p>
         <div className="flex items-center mt-auto">
           <CalendarIcon size={14} color={colors.accent} />
-          <p className="text-xs font-medium ml-2 text-blue-600">
-            {event.date}
-          </p>
+          <p className="text-xs font-medium ml-2 text-blue-600">{event.date}</p>
         </div>
       </div>
     </motion.div>
@@ -123,9 +121,9 @@ function EventModal({ event, onClose }) {
 }
 
 function CurvedTimeline({ events }) {
-  const width = 600; 
+  const width = 600;
   const height = 400;
-  const curveControl = 100; 
+  const curveControl = 100;
 
   return (
     <svg
@@ -135,8 +133,12 @@ function CurvedTimeline({ events }) {
     >
       <path
         d={`M ${width / 2} 0 
-           Q ${width / 2 + curveControl} ${height / 4} ${width / 2} ${height / 2}
-           Q ${width / 2 - curveControl} ${(3 * height) / 4} ${width / 2} ${height}`}
+           Q ${width / 2 + curveControl} ${height / 4} ${width / 2} ${
+          height / 2
+        }
+           Q ${width / 2 - curveControl} ${(3 * height) / 4} ${
+          width / 2
+        } ${height}`}
         fill="none"
         stroke="url(#gradient)"
         strokeWidth="4"
@@ -161,7 +163,11 @@ function Events() {
       setIsLoading(true);
       try {
         const eventsCollection = collection(db, "events");
-        const eventsQuery = query(eventsCollection, orderBy("date", "desc"), limit(5));
+        const eventsQuery = query(
+          eventsCollection,
+          orderBy("date", "desc"),
+          limit(5)
+        );
         const querySnapshot = await getDocs(eventsQuery);
         const eventsList = querySnapshot.docs.map((doc) => ({
           id: doc.id,
@@ -181,18 +187,15 @@ function Events() {
   return (
     <motion.section
       id="events"
-      className="py-24 px-8 relative overflow-hidden"
+      className="py-24 px-8 relative overflow-hidden bg-gradient-to-b from-pink-500/20 via-purple-500/20 to-blue-400/20"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 opacity-20"></div>
-      <div className="absolute top-0 right-0 w-64 h-64 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
-      <div className="absolute bottom-0 left-1/2 w-64 h-64 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
-
+      <div className="absolute inset-0 bg-gradient-to-b from-pink-500 via-purple-500 to-blue-400 opacity-20"></div>
       <div className="max-w-6xl mx-auto relative">
         <motion.h2
-          className="text-5xl font-bold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600"
+          className="text-5xl font-bold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600"
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}

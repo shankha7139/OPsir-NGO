@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { db, storage } from "../firebase/Firebase";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { motion } from "framer-motion";
 import "tailwindcss/tailwind.css";
@@ -43,22 +43,23 @@ const MembershipForm = () => {
     qualification: "",
     address: "",
     photo: null,
+    aadharNumber: "",
   });
   const [isLoading, setIsLoading] = useState(false);
   const [preview, setPreview] = useState(null);
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
 
     if (name === "photo") {
       const file = files[0];
-      if (file && file.size < 11 * 1024 * 1024) { // Check if file size is less than 11MB
+      if (file && file.size < 11 * 1024 * 1024) {
         setFormData((prevData) => ({
           ...prevData,
           photo: file,
         }));
 
-        // Generate a preview of the image
         const reader = new FileReader();
         reader.onloadend = () => {
           setPreview(reader.result);
@@ -75,17 +76,40 @@ const MembershipForm = () => {
     }
   };
 
+  const checkExistingUser = async (email, aadharNumber) => {
+    const emailQuery = query(
+      collection(db, "members"),
+      where("email", "==", email)
+    );
+    const aadharQuery = query(
+      collection(db, "members"),
+      where("aadharNumber", "==", aadharNumber)
+    );
+
+    const emailSnapshot = await getDocs(emailQuery);
+    const aadharSnapshot = await getDocs(aadharQuery);
+
+    if (!emailSnapshot.empty) {
+      throw new Error("Email already exists");
+    }
+
+    if (!aadharSnapshot.empty) {
+      throw new Error("Aadhar number already exists");
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    setError("");
 
     try {
-      // Upload photo to Firebase Storage
+      await checkExistingUser(formData.email, formData.aadharNumber);
+
       const photoRef = ref(storage, `members/${formData.photo.name}`);
       await uploadBytes(photoRef, formData.photo);
       const photoURL = await getDownloadURL(photoRef);
 
-      // Add document to Firestore
       await addDoc(collection(db, "members"), {
         ...formData,
         photo: photoURL,
@@ -101,11 +125,12 @@ const MembershipForm = () => {
         qualification: "",
         address: "",
         photo: null,
+        aadharNumber: "",
       });
-      setPreview(null); // Clear the image preview
+      setPreview(null);
     } catch (error) {
       console.error("Error adding member: ", error);
-      alert("Error adding member!");
+      setError(error.message);
     } finally {
       setIsLoading(false);
     }
@@ -126,6 +151,15 @@ const MembershipForm = () => {
           <h1 className="text-3xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
             Membership Form
           </h1>
+          {error && (
+            <div
+              className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+              role="alert"
+            >
+              <strong className="font-bold">Error: </strong>
+              <span className="block sm:inline">{error}</span>
+            </div>
+          )}
           <motion.form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
@@ -200,6 +234,18 @@ const MembershipForm = () => {
                   type="text"
                   name="qualification"
                   value={formData.qualification}
+                  onChange={handleChange}
+                  className="mt-1 block w-full"
+                  style={neomorphicInputStyle}
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-gray-700">Aadhar Number</label>
+                <input
+                  type="text"
+                  name="aadharNumber"
+                  value={formData.aadharNumber}
                   onChange={handleChange}
                   className="mt-1 block w-full"
                   style={neomorphicInputStyle}

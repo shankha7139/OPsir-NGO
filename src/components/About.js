@@ -8,18 +8,13 @@ function About() {
   return (
     <motion.section
       id="about"
-      className="py-24 px-8 relative overflow-hidden"
+      className="py-24 px-8 relative overflow-hidden bg-gradient-to-b from-blue-400/20 via-purple-500/20 to-pink-500/20"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
     >
       {/* Gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 opacity-20"></div>
-
-      {/* Decorative circles */}
-
-      <div className="absolute top-0 right-0 w-64 h-64 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
-      <div className="absolute bottom-0 left-1/2 w-64 h-64 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-blue-400 via-purple-500 to-pink-500 opacity-20"></div>
 
       <div className="max-w-5xl mx-auto relative z-10">
         <motion.h2
@@ -31,7 +26,7 @@ function About() {
           Our Mission
         </motion.h2>
         <motion.div
-          className="bg-white bg-opacity-90 backdrop-filter backdrop-blur-lg rounded-3xl shadow-xl p-8 md:p-12"
+          className="bg-white/80 backdrop-filter backdrop-blur-lg rounded-3xl shadow-xl p-8 md:p-12"
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.5 }}

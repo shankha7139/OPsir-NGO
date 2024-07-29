@@ -39,7 +39,7 @@ function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="py-20 px-8 bg-gradient-to-br from-blue-200 via-purple-100 to-pink-200"
+      className="py-20 px-8 bg-gradient-to-b from-pink-500/20 via-purple-500/20 to-blue-400/20 "
     >
       <div className="max-w-6xl mx-auto">
         <motion.h2

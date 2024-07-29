@@ -39,11 +39,12 @@ function Gallery() {
   return (
     <section
       id="gallery"
-      className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100"
+      className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-b from-blue-400/20 via-purple-500/20 to-pink-500/20"
     >
+      <div className="absolute inset-0 bg-gradient-to-b from-blue-400 via-purple-500 to-pink-500 opacity-20"></div>
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.h2
-          className="text-5xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600"
+          className="text-5xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-blue-600"
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6 }}
@@ -53,7 +54,7 @@ function Gallery() {
 
         {/* Elevated background for images */}
         <motion.div
-          className="bg-white rounded-3xl shadow-2xl p-8 mb-16"
+          className="bg-white/80 backdrop-filter backdrop-blur-lg rounded-3xl shadow-2xl p-8 mb-16"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}

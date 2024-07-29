@@ -12,6 +12,7 @@ import AboutPage from "./pages/AboutPage";
 import FoundersPage from "./pages/FoundersPage";
 import Membership from "./pages/Membership";
 import GalleryPage from "./pages/GalleryPage";
+import AdmitPage from "./pages/AdmitPage";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/gallery" element={<GalleryPage />} />
         <Route path="/founders" element={<FoundersPage />} />
         <Route path="/membership" element={<Membership />} />
+        <Route path="/admit" element={<AdmitPage />} />
       </Routes>
     </BrowserRouter>
   );
