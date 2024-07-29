@@ -23,6 +23,10 @@ const Membership = () => {
             <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-pink-600">
               Membership Portal
             </h1>
+
+            <h3 className="text-l sm:text-xl font-bold text-center mb-2 text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-pink-600">
+              Are you an esteemed member?
+            </h3>
             <div className="flex justify-center">
               <div className="bg-gray-100 p-1 rounded-full w-full max-w-xs sm:max-w-md">
                 <div className="flex flex-col sm:flex-row justify-center">
@@ -93,20 +97,20 @@ const Membership = () => {
                   <p className="text-gray-600 mb-6">
                     Join us to unlock exclusive benefits and resources. Select your membership status above to get started.
                   </p>
-                  <ul className="text-left max-w-md mx-auto mb-6">
-                    <li className="flex items-center mb-2">
-                      <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
-                      Access to premium content
+                  <ul className="text-center max-w-md mx-auto mb-6">
+                    <li className="flex justify-center items-center mb-2">
+                        <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+                        Access to premium content
                     </li>
-                    <li className="flex items-center mb-2">
-                      <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
-                      Exclusive member events
+                    <li className="flex justify-center items-center mb-2">
+                        <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+                        Exclusive member events
                     </li>
-                    <li className="flex items-center">
-                      <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
-                      Networking opportunities
+                    <li className="flex justify-center items-center">
+                        <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+                        Networking opportunities
                     </li>
-                  </ul>
+                </ul>
                 </div>
               </motion.div>
             )}
